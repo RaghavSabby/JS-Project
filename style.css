@@ -1,0 +1,140 @@
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    background-color: white;
+    padding: 10px 30px;
+}
+
+.navbar a {
+    text-decoration: none;
+    color: black;
+}
+
+/* Wishlist Section */
+.wishlist-section i {
+    padding-top: 30px;
+    cursor: pointer;
+}
+
+.wishlist-menu {
+    display: none;
+    height: 0;
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    z-index: 10;
+    background-color: white;
+    width: 45%;
+    border-right: 1px solid;
+    padding: 5px 10px;
+    background-color: #F1F6F5;
+}
+
+.wishlist-menu h1 {
+    font-size: 1.5rem;
+    padding-left: 10px;
+} 
+
+.wishlist-menu ul {
+    margin: 0;
+    padding: 10px;
+    border-top: 1px solid;
+}
+
+.wishlist-menu li {
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.country-flag-name {
+    display: flex;
+    gap: 10px;
+}
+
+.remove-list-item i {
+    padding-top: 25px;
+    cursor: pointer;
+}
+
+#wishlist-close-btn {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    cursor: pointer;
+}
+
+/* Filter and Search */
+.sub-navbar {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 40px;
+    background-color: #F1F6F5;
+}
+
+form input {
+    padding: 6px;
+    width: 65%;
+    border: 1px solid;
+    border-radius: 3px;
+}
+
+form button {
+    font-family: inherit;
+    padding: 5.5px;
+    cursor: pointer;
+    background-color: white;
+    border: 1px solid;
+    border-radius: 3px;
+}
+
+section.filter-head {
+    margin-bottom: 5px;
+}
+
+select {
+    padding: 6px;
+    width: 100%;
+}
+
+/* Main Content */
+.content-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 20px;
+    padding: 20px 40px;
+    background-color: #F1F6F5;
+}
+
+.country-card {
+    box-shadow: 0px 0px 10px rgb(136, 136, 136);
+    position: relative;
+    overflow: hidden;
+    background-color: white;
+}
+
+.country-card img {
+    object-fit: cover;
+}
+
+.country-card section.country-data {
+    padding: 10px;
+}
+
+.country-name-heart {
+    display: flex;
+    justify-content: space-between;
+}
+
+i.card-heart {
+    padding-top: 20px;
+    cursor: pointer;
+    font-size: 1.5rem;
+}
