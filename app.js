@@ -11,6 +11,7 @@ const countriesList = [
             }
         ],
         "flag": "https://flagcdn.com/w320/in.png", 
+        "alpha3Code": "IND",
     },
     {
         "id": 2,
@@ -24,6 +25,7 @@ const countriesList = [
             }
         ],
         "flag": "https://flagcdn.com/w320/tw.png", 
+        "alpha3Code": "TWN",
     },
     {
         "id": 3,
@@ -37,6 +39,7 @@ const countriesList = [
             }
         ],
         "flag": "https://flagcdn.com/w320/cn.png", 
+        "alpha3Code": "CHN",
     },
     {
         "id": 4,
@@ -50,6 +53,7 @@ const countriesList = [
             }
         ],
         "flag": "https://flagcdn.com/w320/de.png", 
+        "alpha3Code": "DEU",
     },
     {
         "id": 5,
@@ -63,6 +67,7 @@ const countriesList = [
             }
         ],
         "flag": "https://flagcdn.com/w320/es.png", 
+        "alpha3Code": "ESP",
     },
     {
         "id": 6,
@@ -76,6 +81,7 @@ const countriesList = [
             }
         ],
         "flag": "https://flagcdn.com/w320/br.png", 
+        "alpha3Code": "BRA",
     },
     {
         "id": 7,
@@ -89,6 +95,7 @@ const countriesList = [
             }
         ],
         "flag": "https://flagcdn.com/w320/ca.png", 
+        "alpha3Code": "CAN",
     },
     {
         "id": 8,
@@ -102,6 +109,7 @@ const countriesList = [
             }
         ],
         "flag": "https://flagcdn.com/w320/au.png", 
+        "alpha3Code": "AUS",
     },
     {
         "id": 9,
@@ -115,6 +123,7 @@ const countriesList = [
             }
         ],
         "flag": "https://flagcdn.com/w320/nz.png", 
+        "alpha3Code": "NZL",
     },
     {
         "id": 10,
@@ -128,6 +137,7 @@ const countriesList = [
             }
         ],
         "flag": "https://flagcdn.com/w320/za.png", 
+        "alpha3Code": "ZAF",
     },
 ]
 
@@ -162,33 +172,11 @@ const getCountryByRegion = async (region) => {
     return result
 }
 
-// countriesList.map((country) => {
-//     const { name, capital, region, population, currencies: [{ currencyName }], flag, id } = country;
-//     const cardArticle = document.createElement("article");
-//     cardArticle.className = "country-card";
-//     cardArticle.innerHTML += 
-//         `
-//         <img src="${flag}" alt="${name}" width="200px" height="120px">
-//         <section class="country-data">
-//             <section class="country-name-heart">
-//                 <h2 class="country-name">${name}</h2>
-//                 <i class="fa-regular fa-heart card-heart" id="${id}"></i>
-//             </section>
-//             <p class="country-population">Population: ${population}</p>
-//             <p class="country-region">Region: ${region}</p>
-//             <p class="country-capital">Capital: ${capital}</p>
-//             <p class="country-currency">Currency: ${currencyName}</p>
-//         </section>
-//         `;
-    
-//     contentContainer.appendChild(cardArticle);
-// });
-
+// FOR COUNTRIESLIST ARRAY
 const showCountry = (countryData) => {
     contentContainer.innerHTML = "";
     countryData.map((country) => {
-        // const { name, capital, region, population, currencies: [{ currencyName }], flag, id } = country;
-        const { name, capital, region, population, flag, alpha3Code } = country;
+        const { name, capital, region, population, currencies: [{ currencyName }], flag, alpha3Code } = country;
         const cardArticle = document.createElement("article");
         cardArticle.className = "country-card";
         cardArticle.innerHTML += 
@@ -202,34 +190,53 @@ const showCountry = (countryData) => {
                 <p class="country-population">Population: ${population}</p>
                 <p class="country-region">Region: ${region}</p>
                 <p class="country-capital">Capital: ${capital}</p>
+                <p class="country-currency">Currency: ${currencyName}</p>
             </section>
             `;
-
-        const cardHeartBtn = cardArticle.querySelector(".card-heart");
-        cardHeartBtn.addEventListener("click", (event) => {
-            const { id } = event.target;
-            console.log(event.target.id);
-            // Storage.addCountryIdToLocalStorage(id);
-            // showWishList(countriesList);
-            // const getCountryByAlphaCodeData = await getCountryByAlphaCode(id);
-            
-            if (cardHeartBtn.classList.contains("fa-solid")) {
-                Storage.removeCountryAlphaCodeFromLocalStorage(id);
-                // showWishList(countryAlphaCodeArray);
-                cardHeartBtn.classList.remove("fa-solid");
-            } else {
-                Storage.addCountryAlphaCodeToLocalStorage(id);
-                // showWishList(countryAlphaCodeArray);
-                cardHeartBtn.classList.add("fa-solid");
-            }
-            fetchWishlistCountry();
-        })
         contentContainer.appendChild(cardArticle);
     });
-
 }
 
-// showCountry(countriesList);
+// FOR FETCHED DATA
+// const showCountry = (countryData) => {
+//     contentContainer.innerHTML = "";
+//     countryData.map((country) => {
+//         // const { name, capital, region, population, currencies: [{ currencyName }], flag, id } = country;
+//         const { name, capital, region, population, flag, alpha3Code } = country;
+//         const cardArticle = document.createElement("article");
+//         cardArticle.className = "country-card";
+//         cardArticle.innerHTML += 
+//             `
+//             <img src="${flag}" alt="${name}" width="100%" height="200px">
+//             <section class="country-data">
+//                 <section class="country-name-heart">
+//                     <h2 class="country-name">${name}</h2>
+//                     <i class="fa-regular fa-heart card-heart" id="${alpha3Code}"></i>
+//                 </section>
+//                 <p class="country-population">Population: ${population}</p>
+//                 <p class="country-region">Region: ${region}</p>
+//                 <p class="country-capital">Capital: ${capital}</p>
+//             </section>
+//             `;
+
+//         const cardHeartBtn = cardArticle.querySelector(".card-heart");
+//         cardHeartBtn.addEventListener("click", (event) => {
+//             const { id } = event.target;
+//             console.log(event.target.id);
+            
+//             if (cardHeartBtn.classList.contains("fa-solid")) {
+//                 Storage.removeCountryAlphaCodeFromLocalStorage(id);
+//                 cardHeartBtn.classList.remove("fa-solid");
+//             } else {
+//                 Storage.addCountryAlphaCodeToLocalStorage(id);
+//                 cardHeartBtn.classList.add("fa-solid");
+//             }
+//             fetchWishlistCountry();
+//         })
+//         contentContainer.appendChild(cardArticle);
+//     });
+// }
+
 
 class Storage {
 
@@ -250,26 +257,6 @@ class Storage {
 }
 
 window.Storage = Storage;
-
-
-// countriesList.map((country) => {
-//     const { name, flag, id } = country;
-//     let countryIdArray = Storage.getCountryIdFromLocalStorage();
-//     if (countryIdArray.includes(`"${id}"`)) {
-//         const listItem = document.createElement("li");
-//         listItem.innerHTML = 
-//             `
-//                 <section class="country-flag-name">
-//                     <img src="${flag}" alt="${name}" width="110px" height="60px">
-//                     <p>${name}</p>
-//                 </section>
-//                 <section class="remove-list-item">
-//                     <i class="fa-solid fa-xmark fa-xl xmark"></i>
-//                 </section>
-//             `;
-//         unorderedWishList.appendChild(listItem);
-//     }
-// });
 
 const fetchWishlistCountry = async () => {
     unorderedWishList.innerHTML = "";
@@ -305,61 +292,16 @@ const showWishList = (countryAplhaCode) => {
             fetchWishlistCountry();
         });
         unorderedWishList.appendChild(listItem);
-    
-    // countryAplhaCodes.map((countryAplhaCode) => {
-    //     console.log(countryAplhaCode);
-    //     const countryInfo = getCountryByAlphaCode(countryAplhaCode);
-        
-    //     const listItem = document.createElement("li");
-    //     listItem.innerHTML = 
-    //         `
-    //         <section class="country-flag-name">
-    //             <img src="${flag}" alt="${name}" width="110px" height="60px">
-    //             <p>${name}</p>
-    //         </section>
-    //         <section class="remove-list-item">
-    //             <i class="fa-solid fa-xmark fa-xl xmark" id="10"></i>
-    //         </section>
-    //         `;
-
-    //     const removeFromWishlistBtn = listItem.querySelector(".remove-list-item .xmark");
-    //     removeFromWishlistBtn.addEventListener("click", async (event) => {
-    //         const { id } = event.target;
-    //             console.log(event.target.id);
-    //             Storage.removeCountryIdFromLocalStorage(id);
-    //             const getCountryByAlphaCodeData = await getCountryByAlphaCode(id)
-    //             showWishList(getCountryByAlphaCodeData);
-    //     })
-    //     unorderedWishList.appendChild(listItem);
-    // });
 }
-
-// function showWishList(countryData) {
-//     countryData.map((country) => {
-//         const { name, flag, alpha3Code } = country;
-//         let countryIdArray = Storage.getCountryIdFromLocalStorage();
-//         if (countryIdArray.includes(`"${alpha3Code}"`)) {
-//             const listItem = document.createElement("li");
-//             listItem.innerHTML = 
-//                 `
-//                     <section class="country-flag-name">
-//                         <img src="${flag}" alt="${name}" width="110px" height="60px">
-//                         <p>${name}</p>
-//                     </section>
-//                     <section class="remove-list-item">
-//                         <i class="fa-solid fa-xmark fa-xl xmark"></i>
-//                     </section>
-//                 `;
-//             unorderedWishList.appendChild(listItem);
-//         }
-//     });
-// }
-
 
 document.addEventListener("DOMContentLoaded", async () => { 
 
-    const getAllCountriesData = await getAllCountries();
-    showCountry(getAllCountriesData);
+    // SHOWING COUNTRIESLIST DATA
+    showCountry(countriesList);
+
+    // SHOWING FETCHED DATA
+    // const getAllCountriesData = await getAllCountries();
+    // showCountry(getAllCountriesData);
 
     fetchWishlistCountry();
 
@@ -398,35 +340,4 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     document.querySelector("i#wishlish-heart-btn").addEventListener("click", showMenu);
     document.getElementById("wishlist-close-btn").addEventListener("click", closeMenu);
-
-    // const cardHeartBtn = document.querySelectorAll(".country-name-heart .card-heart");
-    // for (let i=0; i<cardHeartBtn.length; i++) {
-    //     cardHeartBtn[i].addEventListener("click", async (event) => {
-    //         const { id } = event.target;
-    //         console.log(event.target.id);
-    //         // Storage.addCountryIdToLocalStorage(id);
-    //         // showWishList(countriesList);
-    //         const getCountryByAlphaCodeData = await getCountryByAlphaCode(id);
-    //         if (cardHeartBtn[i].classList.contains("fa-solid")) {
-    //             Storage.removeCountryIdFromLocalStorage(id);
-    //             showWishList(getCountryByAlphaCodeData);
-    //             cardHeartBtn[i].classList.remove("fa-solid");
-    //         } else {
-    //             Storage.addCountryIdToLocalStorage(id);
-    //             showWishList(getCountryByAlphaCodeData);
-    //             cardHeartBtn[i].classList.add("fa-solid");
-    //         }
-    //     });
-    // }
-
-    // const removeFromWishlistBtn = document.querySelectorAll(".remove-list-item .xmark");
-    // for (let i=0; i<removeFromWishlistBtn.length; i++) {
-    //     removeFromWishlistBtn[i].addEventListener("click", async (event) => {
-    //         const { id } = event.target;
-    //         console.log(event.target.id);
-    //         Storage.removeCountryIdFromLocalStorage(id);
-    //         const getCountryByAlphaCodeData = await getCountryByAlphaCode(id)
-    //         showWishList(getCountryByAlphaCodeData);
-    //     });
-    // }
 });
