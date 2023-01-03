@@ -172,6 +172,7 @@ const getCountryByRegion = async (region) => {
     return result
 }
 
+// Part 1 Solution
 // FOR COUNTRIESLIST ARRAY
 const showCountry = (countryData) => {
     contentContainer.innerHTML = "";
@@ -193,9 +194,45 @@ const showCountry = (countryData) => {
                 <p class="country-currency">Currency: ${currencyName}</p>
             </section>
             `;
+        
+        // Part 2 Solution
+        const cardHeartBtn = cardArticle.querySelector(".card-heart");
+        cardHeartBtn.addEventListener("click", (event) => {
+            const { id } = event.target;
+            console.log(event.target.id);
+                        
+            if (cardHeartBtn.classList.contains("fa-solid")) {
+                Storage.removeCountryAlphaCodeFromLocalStorage(id);
+                cardHeartBtn.classList.remove("fa-solid");
+            } else {
+                Storage.addCountryAlphaCodeToLocalStorage(id);
+                cardHeartBtn.classList.add("fa-solid");
+            }
+        });
         contentContainer.appendChild(cardArticle);
     });
 }
+
+// Part 2 Solution
+class Storage {
+
+    static getCountryAlphaCodeFromLocalStorage() {
+        const countryAlphaCodes = JSON.parse(localStorage.getItem("countryAlphaCodes"));
+        return countryAlphaCodes === null ? [] : countryAlphaCodes;
+    }
+
+    static addCountryAlphaCodeToLocalStorage(countryAlphaCode) {
+        const countryAlphaCodes = this.getCountryAlphaCodeFromLocalStorage();
+        localStorage.setItem("countryAlphaCodes", JSON.stringify([...countryAlphaCodes, countryAlphaCode]));
+    }
+
+    static removeCountryAlphaCodeFromLocalStorage(countryAlphaCode) {
+        const countryAlphaCodes = this.getCountryAlphaCodeFromLocalStorage();
+        localStorage.setItem("countryAlphaCodes", JSON.stringify(countryAlphaCodes.filter((id) => id !== countryAlphaCode)));
+    }
+}
+
+window.Storage = Storage;
 
 // FOR FETCHED DATA
 // const showCountry = (countryData) => {
@@ -237,26 +274,6 @@ const showCountry = (countryData) => {
 //     });
 // }
 
-
-class Storage {
-
-    static getCountryAlphaCodeFromLocalStorage() {
-        const countryAlphaCodes = JSON.parse(localStorage.getItem("countryAlphaCodes"));
-        return countryAlphaCodes === null ? [] : countryAlphaCodes;
-    }
-
-    static addCountryAlphaCodeToLocalStorage(countryAlphaCode) {
-        const countryAlphaCodes = this.getCountryAlphaCodeFromLocalStorage();
-        localStorage.setItem("countryAlphaCodes", JSON.stringify([...countryAlphaCodes, countryAlphaCode]));
-    }
-
-    static removeCountryAlphaCodeFromLocalStorage(countryAlphaCode) {
-        const countryAlphaCodes = this.getCountryAlphaCodeFromLocalStorage();
-        localStorage.setItem("countryAlphaCodes", JSON.stringify(countryAlphaCodes.filter((id) => id !== countryAlphaCode)));
-    }
-}
-
-window.Storage = Storage;
 
 const fetchWishlistCountry = async () => {
     unorderedWishList.innerHTML = "";
