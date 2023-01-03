@@ -144,6 +144,7 @@ const countriesList = [
 const contentContainer = document.querySelector(".content-container");
 const unorderedWishList = document.querySelector(".unordered-wishlist");
 
+//PART 3 SOLUION
 // Fetching all the countries
 const getAllCountries = async () => {
     const response = await fetch("https://restcountries.com/v2/all");
@@ -174,44 +175,44 @@ const getCountryByRegion = async (region) => {
 
 // Part 1 Solution
 // FOR COUNTRIESLIST ARRAY
-const showCountry = (countryData) => {
-    contentContainer.innerHTML = "";
-    countryData.map((country) => {
-        const { name, capital, region, population, currencies: [{ currencyName }], flag, alpha3Code } = country;
-        const cardArticle = document.createElement("article");
-        cardArticle.className = "country-card";
-        cardArticle.innerHTML += 
-            `
-            <img src="${flag}" alt="${name}" width="100%" height="200px">
-            <section class="country-data">
-                <section class="country-name-heart">
-                    <h2 class="country-name">${name}</h2>
-                    <i class="fa-regular fa-heart card-heart" id="${alpha3Code}"></i>
-                </section>
-                <p class="country-population">Population: ${population}</p>
-                <p class="country-region">Region: ${region}</p>
-                <p class="country-capital">Capital: ${capital}</p>
-                <p class="country-currency">Currency: ${currencyName}</p>
-            </section>
-            `;
+// const showCountry = (countryData) => {
+//     contentContainer.innerHTML = "";
+//     countryData.map((country) => {
+//         const { name, capital, region, population, currencies: [{ currencyName }], flag, alpha3Code } = country;
+//         const cardArticle = document.createElement("article");
+//         cardArticle.className = "country-card";
+//         cardArticle.innerHTML += 
+//             `
+//             <img src="${flag}" alt="${name}" width="100%" height="200px">
+//             <section class="country-data">
+//                 <section class="country-name-heart">
+//                     <h2 class="country-name">${name}</h2>
+//                     <i class="fa-regular fa-heart card-heart" id="${alpha3Code}"></i>
+//                 </section>
+//                 <p class="country-population">Population: ${population}</p>
+//                 <p class="country-region">Region: ${region}</p>
+//                 <p class="country-capital">Capital: ${capital}</p>
+//                 <p class="country-currency">Currency: ${currencyName}</p>
+//             </section>
+//             `;
         
-        // Part 2 Solution
-        const cardHeartBtn = cardArticle.querySelector(".card-heart");
-        cardHeartBtn.addEventListener("click", (event) => {
-            const { id } = event.target;
-            console.log(event.target.id);
+//         // Part 2 Solution
+//         const cardHeartBtn = cardArticle.querySelector(".card-heart");
+//         cardHeartBtn.addEventListener("click", (event) => {
+//             const { id } = event.target;
+//             console.log(event.target.id);
                         
-            if (cardHeartBtn.classList.contains("fa-solid")) {
-                Storage.removeCountryAlphaCodeFromLocalStorage(id);
-                cardHeartBtn.classList.remove("fa-solid");
-            } else {
-                Storage.addCountryAlphaCodeToLocalStorage(id);
-                cardHeartBtn.classList.add("fa-solid");
-            }
-        });
-        contentContainer.appendChild(cardArticle);
-    });
-}
+//             if (cardHeartBtn.classList.contains("fa-solid")) {
+//                 Storage.removeCountryAlphaCodeFromLocalStorage(id);
+//                 cardHeartBtn.classList.remove("fa-solid");
+//             } else {
+//                 Storage.addCountryAlphaCodeToLocalStorage(id);
+//                 cardHeartBtn.classList.add("fa-solid");
+//             }
+//         });
+//         contentContainer.appendChild(cardArticle);
+//     });
+// }
 
 // Part 2 Solution
 class Storage {
@@ -234,45 +235,45 @@ class Storage {
 
 window.Storage = Storage;
 
+//PART 3 SOLUION
 // FOR FETCHED DATA
-// const showCountry = (countryData) => {
-//     contentContainer.innerHTML = "";
-//     countryData.map((country) => {
-//         // const { name, capital, region, population, currencies: [{ currencyName }], flag, id } = country;
-//         const { name, capital, region, population, flag, alpha3Code } = country;
-//         const cardArticle = document.createElement("article");
-//         cardArticle.className = "country-card";
-//         cardArticle.innerHTML += 
-//             `
-//             <img src="${flag}" alt="${name}" width="100%" height="200px">
-//             <section class="country-data">
-//                 <section class="country-name-heart">
-//                     <h2 class="country-name">${name}</h2>
-//                     <i class="fa-regular fa-heart card-heart" id="${alpha3Code}"></i>
-//                 </section>
-//                 <p class="country-population">Population: ${population}</p>
-//                 <p class="country-region">Region: ${region}</p>
-//                 <p class="country-capital">Capital: ${capital}</p>
-//             </section>
-//             `;
+const showCountry = (countryData) => {
+    contentContainer.innerHTML = "";
+    countryData.map((country) => {
+        const { name, capital, region, population, flag, alpha3Code } = country;
+        const cardArticle = document.createElement("article");
+        cardArticle.className = "country-card";
+        cardArticle.innerHTML += 
+            `
+            <img src="${flag}" alt="${name}" width="100%" height="200px">
+            <section class="country-data">
+                <section class="country-name-heart">
+                    <h2 class="country-name">${name}</h2>
+                    <i class="fa-regular fa-heart card-heart" id="${alpha3Code}"></i>
+                </section>
+                <p class="country-population">Population: ${population}</p>
+                <p class="country-region">Region: ${region}</p>
+                <p class="country-capital">Capital: ${capital}</p>
+            </section>
+            `;
 
-//         const cardHeartBtn = cardArticle.querySelector(".card-heart");
-//         cardHeartBtn.addEventListener("click", (event) => {
-//             const { id } = event.target;
-//             console.log(event.target.id);
+        const cardHeartBtn = cardArticle.querySelector(".card-heart");
+        cardHeartBtn.addEventListener("click", (event) => {
+            const { id } = event.target;
+            console.log(event.target.id);
             
-//             if (cardHeartBtn.classList.contains("fa-solid")) {
-//                 Storage.removeCountryAlphaCodeFromLocalStorage(id);
-//                 cardHeartBtn.classList.remove("fa-solid");
-//             } else {
-//                 Storage.addCountryAlphaCodeToLocalStorage(id);
-//                 cardHeartBtn.classList.add("fa-solid");
-//             }
-//             fetchWishlistCountry();
-//         })
-//         contentContainer.appendChild(cardArticle);
-//     });
-// }
+            if (cardHeartBtn.classList.contains("fa-solid")) {
+                Storage.removeCountryAlphaCodeFromLocalStorage(id);
+                cardHeartBtn.classList.remove("fa-solid");
+            } else {
+                Storage.addCountryAlphaCodeToLocalStorage(id);
+                cardHeartBtn.classList.add("fa-solid");
+            }
+            fetchWishlistCountry();
+        })
+        contentContainer.appendChild(cardArticle);
+    });
+}
 
 
 const fetchWishlistCountry = async () => {
@@ -314,14 +315,15 @@ const showWishList = (countryAplhaCode) => {
 document.addEventListener("DOMContentLoaded", async () => { 
 
     // SHOWING COUNTRIESLIST DATA
-    showCountry(countriesList);
+    // showCountry(countriesList);
 
     // SHOWING FETCHED DATA
-    // const getAllCountriesData = await getAllCountries();
-    // showCountry(getAllCountriesData);
+    const getAllCountriesData = await getAllCountries();
+    showCountry(getAllCountriesData);
 
     fetchWishlistCountry();
 
+    // Part 4
     document.querySelector("button.search-btn").addEventListener("click", async (event) => {
         event.preventDefault();
         const searchInputField = document.querySelector("input#search");
@@ -331,6 +333,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         showCountry(getCountryBySearchData);
     });
 
+    // Part 5
     document.querySelector("select#countries").addEventListener("change", async (event) => {
         event.preventDefault();
         const optionValue = document.querySelector("select#countries");
