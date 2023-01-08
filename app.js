@@ -358,6 +358,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         wishlistMenu.style.display = "none";
     }
 
-    document.querySelector("i#wishlish-heart-btn").addEventListener("click", showMenu);
+    document.querySelector("i#wishlist-heart-btn").addEventListener("click", showMenu);
     document.getElementById("wishlist-close-btn").addEventListener("click", closeMenu);
 });

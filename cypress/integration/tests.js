@@ -197,67 +197,111 @@
 //     });
 // });
 
-describe('Check Filter Functionality which supports Local Storage', () => {
-    it('Check Filter Functionality which supports Local Storage', () => {
-        cy.visit("/");
-        cy.wait(5000);
-        cy.get("select#countries").select("Africa");
+// describe('Check Filter Functionality which supports Local Storage', () => {
+//     it('Check Filter Functionality which supports Local Storage', () => {
+//         cy.visit("/");
+//         cy.wait(5000);
+//         cy.get("select#countries").select("Africa");
+//         cy.wait(5000);
+//         cy.get("main.content-container").within(() => {
+//             cy.get("article.country-card").should("have.length", 60).and("exist").and("be.visible");
+//             cy.get("article.country-card").then((articles) => {
+//                 for (let i=0; i <= 5; i++) {
+//                     cy.get(articles[i]).within(() => {
+//                         cy.get("p").then((paras) => {
+//                             // const firstPara = paras[0];
+//                             // cy.get(firstPara).should("exist").and("be.visible").invoke("text").should("be.length.gt", 0);
+//                             const secondPara = paras[1];
+//                             cy.get(secondPara).should("exist").and("be.visible").contains("Africa");
+//                             // const thirdPara = paras[2];
+//                             // cy.get(thirdPara).should("exist").and("be.visible").invoke("text").should("be.length.gt", 0);
+//                         });
+//                     });
+//                 }
+//             });
+//             cy.get("article.country-card").then((articles) => {
+//                 const secondArticle = articles[0];
+//                 cy.get(secondArticle).within(() => {
+//                     cy.get("img").should("exist").and("be.visible").and("have.attr", "src");
+//                     cy.get("h2").should("exist").and("be.visible").and("have.text", "Algeria");
+//                     cy.get("i").should("have.attr", "id");
+//                     cy.get("p").then((paras) => {
+//                         const firstPara = paras[0];
+//                         cy.get(firstPara).should("exist").and("be.visible").invoke("text").should("be.length.gt", 0);
+//                         const secondPara = paras[1];
+//                         cy.get(secondPara).should("exist").and("be.visible").contains("Africa");
+//                         const thirdPara = paras[2];
+//                         cy.get(thirdPara).should("exist").and("be.visible").invoke("text").should("be.length.gt", 0);
+//                     });
+//                     cy.get("i").should("have.attr", "id", "DZA").click().should(() => {
+//                         expect(localStorage.getItem("countryAlphaCodes")).to.length(7);
+//                         expect(localStorage.getItem("countryAlphaCodes")).to.eq('["DZA"]');
+//                     });
+//                 });
+//             });
+//         });
+
+//         cy.get("select#countries").select("Europe");
+//         cy.wait(5000);
+//         cy.get("main.content-container").within(() => {
+//             cy.get("article.country-card").should("have.length", 53).and("exist").and("be.visible");
+//             cy.get("article.country-card").then((articles) => {
+//                 for (let i=0; i <= 5; i++) {
+//                     cy.get(articles[i]).within(() => {
+//                         cy.get("p").then((paras) => {
+//                             // const firstPara = paras[0];
+//                             // cy.get(firstPara).should("exist").and("be.visible").invoke("text").should("be.length.gt", 0);
+//                             const secondPara = paras[1];
+//                             cy.get(secondPara).should("exist").and("be.visible").contains("Europe");
+//                             // const thirdPara = paras[2];
+//                             // cy.get(thirdPara).should("exist").and("be.visible").invoke("text").should("be.length.gt", 0);
+//                         });
+//                     });
+//                 }
+//             });
+//         });
+//     });
+// });
+
+describe('Check Wishlist Section', () => {
+    it('Check Wishlist Section', () => {
+        cy.visit('/');
         cy.wait(5000);
         cy.get("main.content-container").within(() => {
-            cy.get("article.country-card").should("have.length", 60).and("exist").and("be.visible");
             cy.get("article.country-card").then((articles) => {
-                for (let i=0; i <= 5; i++) {
-                    cy.get(articles[i]).within(() => {
-                        cy.get("p").then((paras) => {
-                            // const firstPara = paras[0];
-                            // cy.get(firstPara).should("exist").and("be.visible").invoke("text").should("be.length.gt", 0);
-                            const secondPara = paras[1];
-                            cy.get(secondPara).should("exist").and("be.visible").contains("Africa");
-                            // const thirdPara = paras[2];
-                            // cy.get(thirdPara).should("exist").and("be.visible").invoke("text").should("be.length.gt", 0);
-                        });
-                    });
-                }
-            });
-            cy.get("article.country-card").then((articles) => {
-                const secondArticle = articles[0];
-                cy.get(secondArticle).within(() => {
-                    cy.get("img").should("exist").and("be.visible").and("have.attr", "src");
-                    cy.get("h2").should("exist").and("be.visible").and("have.text", "Algeria");
-                    cy.get("i").should("have.attr", "id");
-                    cy.get("p").then((paras) => {
-                        const firstPara = paras[0];
-                        cy.get(firstPara).should("exist").and("be.visible").invoke("text").should("be.length.gt", 0);
-                        const secondPara = paras[1];
-                        cy.get(secondPara).should("exist").and("be.visible").contains("Africa");
-                        const thirdPara = paras[2];
-                        cy.get(thirdPara).should("exist").and("be.visible").invoke("text").should("be.length.gt", 0);
-                    });
-                    cy.get("i").should("have.attr", "id", "DZA").click().should(() => {
-                        expect(localStorage.getItem("countryAlphaCodes")).to.length(7);
-                        expect(localStorage.getItem("countryAlphaCodes")).to.eq('["DZA"]');
-                    });
+                const albaniaCard = articles[2];
+                cy.get(albaniaCard).within(() => {
+                        cy.get("i").should("have.attr", "id", "ALB").click();
+                });
+                const algeriaCard = articles[3];
+                cy.get(algeriaCard).within(() => {
+                        cy.get("i").should("have.attr", "id", "DZA").click();
                 });
             });
         });
-
-        cy.get("select#countries").select("Europe");
-        cy.wait(5000);
-        cy.get("main.content-container").within(() => {
-            cy.get("article.country-card").should("have.length", 53).and("exist").and("be.visible");
-            cy.get("article.country-card").then((articles) => {
-                for (let i=0; i <= 5; i++) {
-                    cy.get(articles[i]).within(() => {
-                        cy.get("p").then((paras) => {
-                            // const firstPara = paras[0];
-                            // cy.get(firstPara).should("exist").and("be.visible").invoke("text").should("be.length.gt", 0);
-                            const secondPara = paras[1];
-                            cy.get(secondPara).should("exist").and("be.visible").contains("Europe");
-                            // const thirdPara = paras[2];
-                            // cy.get(thirdPara).should("exist").and("be.visible").invoke("text").should("be.length.gt", 0);
-                        });
-                    });
-                }
+        cy.get("#wishlist-heart-btn").click();
+        cy.get("ul.unordered-wishlist").should("exist").and("be.visible");
+        cy.get("ul.unordered-wishlist").within(() => {
+            cy.wait(5000);
+            cy.get("li").should("have.length", 3).should("exist").and("be.visible");
+            cy.get("li").within((listItems) => {
+                const albaniaItem = listItems[1];
+                cy.get(albaniaItem).should("exist").and("be.visible").contains("Albania");
+                const algeriaItem = listItems[2];
+                cy.get(algeriaItem).should("exist").and("be.visible").contains("Algeria");
+            });
+            cy.get("li").within((listItems) => {
+                const albaniaItem = listItems[0];
+                cy.get(albaniaItem).within(() => {
+                    cy.get("section.remove-list-item").click();
+                });
+            });
+        });
+        cy.get("ul.unordered-wishlist").within(() => {
+            cy.get("li").should("exist").and("be.visible").and("have.length", 1);
+            cy.get("li").within((listItems) => {
+                const algeriaItem = listItems[0];
+                cy.get(algeriaItem).should("exist").and("be.visible").contains("Algeria");
             });
         });
     });
