@@ -152,6 +152,7 @@ const getAllCountries = async () => {
     return result;
 }
 
+// Part 6 SOLUION
 // Fetching countries by alpha3Code, using in LocalStorage
 const getCountryByAlphaCode = async (alphaCode) => {
     const response = await fetch(`https://restcountries.com/v2/alpha/${alphaCode}`);
@@ -159,6 +160,7 @@ const getCountryByAlphaCode = async (alphaCode) => {
     return result;
 }
 
+// Part 4 SOLUION
 // Fetching countries by country name
 const getCountryBySearch = async (searchText) => {
     const response = await fetch(`https://restcountries.com/v2/name/${searchText}`);
@@ -166,6 +168,7 @@ const getCountryBySearch = async (searchText) => {
     return result
 }
 
+// Part 5 SOLUION
 // Fetching countries by region
 const getCountryByRegion = async (region) => {
     const response = await fetch(`https://restcountries.com/v2/region/${region}`);
@@ -275,7 +278,7 @@ const showCountry = (countryData) => {
     });
 }
 
-
+// Part 6 SOLUION
 const fetchWishlistCountry = async () => {
     unorderedWishList.innerHTML = "";
     const countryAlphaCodeArray = Storage.getCountryAlphaCodeFromLocalStorage();
@@ -286,6 +289,7 @@ const fetchWishlistCountry = async () => {
     }
 }
 
+// Part 6 SOLUION
 const showWishList = (countryAplhaCode) => {
 
     const { flag, name, alpha3Code } = countryAplhaCode;
@@ -321,9 +325,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     const getAllCountriesData = await getAllCountries();
     showCountry(getAllCountriesData);
 
+    // Part 6 SOLUION
     fetchWishlistCountry();
 
-    // Part 4
+    // Part 4 SOLUION
     document.querySelector("button.search-btn").addEventListener("click", async (event) => {
         event.preventDefault();
         const searchInputField = document.querySelector("input#search");
@@ -333,7 +338,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         showCountry(getCountryBySearchData);
     });
 
-    // Part 5
+    // Part 5 SOLUION
     document.querySelector("select#countries").addEventListener("change", async (event) => {
         event.preventDefault();
         const optionValue = document.querySelector("select#countries");
