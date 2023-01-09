@@ -37,6 +37,25 @@
 // Create a Storage class: Create a static function named "getCountryAlphaCodeFromLocalStorage" which gets the list of all the alpha3Code already present in the cart. Note: Store the elements under the key "countryAlphaCodes" in local storage. Create a static function named "addCountryAlphaCodeToLocalStorage" which takes in an argument (countryAlphaCode) and adds it to the already existing list of products present in the cart. Create another static function "removeCountryAlphaCodeFromLocalStorage" which takes in a argument (countryAlphaCode) and removes that countryAlphaCode from the array in the local storage.
 // This is how the application will look after you have implemented the task.
 
+describe('Check LocalStorage Functionality developed using Class', () => {
+    it('Check LocalStorage Functionality developed using Class', () => {
+        cy.visit("/");
+        cy.wait(5000);
+        cy.window().then((win) => {
+            let alphaCode = ["IND"];
+            win.localStorage.setItem("countryAlphaCodes", JSON.stringify(alphaCode));
+            let code = win.Storage.getCountryAlphaCodeFromLocalStorage();
+            cy.wrap(code).should("have.length", 1);
+            win.Storage.addCountryAlphaCodeToLocalStorage("USA");
+            code = win.Storage.getCountryAlphaCodeFromLocalStorage();
+            cy.wrap(code).should("have.length", 2);
+            win.Storage.removeCountryAlphaCodeFromLocalStorage("USA");
+            code = win.Storage.getCountryAlphaCodeFromLocalStorage();
+            cy.wrap(code).should("have.length", 1);
+        });
+    });
+});
+
 // describe('Check LocalStorage Functionality', () => {
 //     it('Check LocalStorage Functionality', () => {
 //         cy.visit("/");
@@ -266,46 +285,46 @@
 // Within the HTML given above, there is a section with class="remove-list-item". This is section should have a click event which removes the country from the wishlist section and the alpha3Code from the "countryAlphaCodes" array.
 // This is how the application will look after you have implemented the task.
 
-describe('Check Wishlist Section', () => {
-    it('Check Wishlist Section', () => {
-        cy.visit('/');
-        cy.wait(5000);
-        cy.get("main.content-container").within(() => {
-            cy.get("article.country-card").then((articles) => {
-                const albaniaCard = articles[2];
-                cy.get(albaniaCard).within(() => {
-                        cy.get("i").click();
-                });
-                const algeriaCard = articles[3];
-                cy.get(algeriaCard).within(() => {
-                        cy.get("i").click();
-                });
-            });
-        });
-        cy.get("#wishlist-heart-btn").click();
-        cy.get("ul.unordered-wishlist").should("exist").and("be.visible");
-        cy.get("ul.unordered-wishlist").within(() => {
-            cy.wait(5000);
-            cy.get("li").should("have.length", 3).should("exist").and("be.visible");
-            cy.get("li").within((listItems) => {
-                const albaniaItem = listItems[1];
-                cy.get(albaniaItem).should("exist").and("be.visible").contains("Albania");
-                const algeriaItem = listItems[2];
-                cy.get(algeriaItem).should("exist").and("be.visible").contains("Algeria");
-            });
-            cy.get("li").within((listItems) => {
-                const albaniaItem = listItems[0];
-                cy.get(albaniaItem).within(() => {
-                    cy.get("section.remove-list-item").click();
-                });
-            });
-        });
-        cy.get("ul.unordered-wishlist").within(() => {
-            cy.get("li").should("exist").and("be.visible").and("have.length", 1);
-            cy.get("li").within((listItems) => {
-                const algeriaItem = listItems[0];
-                cy.get(algeriaItem).should("exist").and("be.visible").contains("Algeria");
-            });
-        });
-    });
-});
+// describe('Check Wishlist Section', () => {
+//     it('Check Wishlist Section', () => {
+//         cy.visit('/');
+//         cy.wait(5000);
+//         cy.get("main.content-container").within(() => {
+//             cy.get("article.country-card").then((articles) => {
+//                 const albaniaCard = articles[2];
+//                 cy.get(albaniaCard).within(() => {
+//                         cy.get("i").click();
+//                 });
+//                 const algeriaCard = articles[3];
+//                 cy.get(algeriaCard).within(() => {
+//                         cy.get("i").click();
+//                 });
+//             });
+//         });
+//         cy.get("#wishlist-heart-btn").click();
+//         cy.get("ul.unordered-wishlist").should("exist").and("be.visible");
+//         cy.get("ul.unordered-wishlist").within(() => {
+//             cy.wait(5000);
+//             cy.get("li").should("have.length", 3).should("exist").and("be.visible");
+//             cy.get("li").within((listItems) => {
+//                 const albaniaItem = listItems[1];
+//                 cy.get(albaniaItem).should("exist").and("be.visible").contains("Albania");
+//                 const algeriaItem = listItems[2];
+//                 cy.get(algeriaItem).should("exist").and("be.visible").contains("Algeria");
+//             });
+//             cy.get("li").within((listItems) => {
+//                 const albaniaItem = listItems[0];
+//                 cy.get(albaniaItem).within(() => {
+//                     cy.get("section.remove-list-item").click();
+//                 });
+//             });
+//         });
+//         cy.get("ul.unordered-wishlist").within(() => {
+//             cy.get("li").should("exist").and("be.visible").and("have.length", 1);
+//             cy.get("li").within((listItems) => {
+//                 const algeriaItem = listItems[0];
+//                 cy.get(algeriaItem).should("exist").and("be.visible").contains("Algeria");
+//             });
+//         });
+//     });
+// });
