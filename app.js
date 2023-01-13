@@ -139,7 +139,7 @@ const countriesList = [
         "flag": "https://flagcdn.com/w320/za.png", 
         "alpha3Code": "ZAF",
     },
-]
+];
 
 const contentContainer = document.querySelector(".content-container");
 const unorderedWishList = document.querySelector(".unordered-wishlist");
@@ -149,7 +149,7 @@ const unorderedWishList = document.querySelector(".unordered-wishlist");
 const getAllCountries = async () => {
     const response = await fetch("https://restcountries.com/v2/all");
     const result = await response.json();
-    return result;
+    showCountry(result);
 }
 
 // Part 6 SOLUION
@@ -234,6 +234,7 @@ class Storage {
         const countryAlphaCodes = this.getCountryAlphaCodeFromLocalStorage();
         localStorage.setItem("countryAlphaCodes", JSON.stringify(countryAlphaCodes.filter((id) => id !== countryAlphaCode)));
     }
+
 }
 
 window.Storage = Storage;
@@ -316,53 +317,42 @@ const showWishList = (countryAplhaCode) => {
         unorderedWishList.appendChild(listItem);
 }
 
-document.addEventListener("DOMContentLoaded", async () => { 
+getAllCountries();
 
-    // SHOWING COUNTRIESLIST DATA
-    // showCountry(countriesList);
-
-    // SHOWING FETCHED DATA
-    const getAllCountriesData = await getAllCountries();
-    showCountry(getAllCountriesData);
-
-    // Part 6 SOLUION
-    fetchWishlistCountry();
-
-    // Part 4 SOLUION
-    document.querySelector("button.search-btn").addEventListener("click", async (event) => {
-        event.preventDefault();
-        const searchInputField = document.querySelector("input#search");
-        console.log(searchInputField.value);
-        const getCountryBySearchData = await getCountryBySearch(searchInputField.value);
-        console.log(getCountryBySearchData);
-        showCountry(getCountryBySearchData);
-    });
-
-    // Part 5 SOLUION
-    document.querySelector("select#countries").addEventListener("change", async (event) => {
-        event.preventDefault();
-        const optionValue = document.querySelector("select#countries");
-        console.log(optionValue.value);
-        if (optionValue.value == "All") {
-            showCountry(getAllCountriesData);
-        } else {
-            const getCountryByRegionData = await getCountryByRegion(optionValue.value);
-            showCountry(getCountryByRegionData);
-        }     
-    });
-    
-    function showMenu() {
-        const wishlistMenu = document.querySelector("section.wishlist-menu");
-        wishlistMenu.style.height = "100%";
-        wishlistMenu.style.display = "block";
-    }
-
-    function closeMenu() {
-        const wishlistMenu = document.querySelector("section.wishlist-menu");
-        wishlistMenu.style.height = "0";
-        wishlistMenu.style.display = "none";
-    }
-
-    document.querySelector("i#wishlist-heart-btn").addEventListener("click", showMenu);
-    document.getElementById("wishlist-close-btn").addEventListener("click", closeMenu);
+document.querySelector("button.search-btn").addEventListener("click", async (event) => {
+    event.preventDefault();
+    const searchInputField = document.querySelector("input#search");
+    console.log(searchInputField.value);
+    const getCountryBySearchData = await getCountryBySearch(searchInputField.value);
+    console.log(getCountryBySearchData);
+    showCountry(getCountryBySearchData);
 });
+
+document.querySelector("select#countries").addEventListener("change", async (event) => {
+    event.preventDefault();
+    const optionValue = document.querySelector("select#countries");
+    console.log(optionValue.value);
+    if (optionValue.value == "All") {
+        getAllCountries();
+    } else {
+        const getCountryByRegionData = await getCountryByRegion(optionValue.value);
+        showCountry(getCountryByRegionData);
+    }     
+});
+
+fetchWishlistCountry();
+
+function showMenu() {
+    const wishlistMenu = document.querySelector("section.wishlist-menu");
+    wishlistMenu.style.height = "100%";
+    wishlistMenu.style.display = "block";
+}
+
+function closeMenu() {
+    const wishlistMenu = document.querySelector("section.wishlist-menu");
+    wishlistMenu.style.height = "0";
+    wishlistMenu.style.display = "none";
+}
+
+document.querySelector("i#wishlist-heart-btn").addEventListener("click", showMenu);
+document.getElementById("wishlist-close-btn").addEventListener("click", closeMenu);

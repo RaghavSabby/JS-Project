@@ -9,6 +9,7 @@
 describe('Check CountriesList Iterations', () => {
     it('Check CountriesList Iterations', () => {
         cy.visit("/");
+        cy.wait(5000);
         cy.get("main.content-container").within(() => {
             cy.get("article.country-card").should('have.length', 10).and("exist").and("be.visible");
         });
